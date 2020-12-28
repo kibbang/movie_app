@@ -1,13 +1,18 @@
 <template>
   <section class="container">
     <div>
-      <h1 class="loader" v-show="isLoading">Loading</h1>
+      <h1 class="loader" v-show="isLoading">Loading...</h1>
       <div class="movie_info">
         <ul v-for="movie in movies" :key="movie.id" style="list-style: none">
-          <img :src="movie.medium_cover_image">
-          <li>{{ movie.title }}</li>
+          <img :src="movie.medium_cover_image" alt />
+          <br>
+          <br>
+          <router-link :to="`/movie/${movie.id}`">{{ movie.title }}</router-link>
+          <br>
+          <br>
           <li>{{ movie.year }}</li>
-          <li>{{ movie.summary }}</li>
+          <br>
+          <li>{{ movie.summary.slice(0,200) }}</li>
         </ul>
       </div>
     </div>
@@ -19,10 +24,10 @@ export default {
   data(){
     return {
       isLoading: true,
-      movies:[]
+      movies:[],
     }
   },
-  
+
   mounted() {
     this.getInfo()
   },
@@ -48,6 +53,7 @@ export default {
   height: 100%;
   display: flex;
   justify-content: center;
+
 }
 
 .loader {
@@ -67,6 +73,5 @@ export default {
   width: 80%;
   padding-top: 70px;
 }
-
 
 </style>
